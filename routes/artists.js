@@ -1,13 +1,19 @@
 // artists.js
 const express = require("express");
 const router = express.Router();
-const artistController = require("../controllers/artists.controller");
-const artistControllers = require("../services/artists.service");
+const {
+    getAllArtists,
+    getArtistById,
+    createArtist,
+    updateArtist,
+    deleteArtist
+} = require("../controllers/artists.controller");
+const upload = require("../middleware/multer");
 
-router.get('/', artistController.getAllArtists);
-router.get('/:id', artistController.getArtistById);
-router.post('/', artistController.createArtist);
-// router.put('/:id', artistController.updateArtist);
-// router.delete('/:id', artistController.deleteArtist);
+router.get('/', getAllArtists);
+router.post('/', upload.single("image"), createArtist);
+router.get('/:id', getArtistById);
+router.put('/:id', upload.single("image"), updateArtist);
+router.delete('/:id', deleteArtist);
 
 module.exports = router;

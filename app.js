@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 // const mongoose = require("mongoose");
 // const config = require("./config");
+const fs = require("fs");
 const dbConnection = require("./config/db_config");
 const PORT = process.env.PORT;
 
@@ -11,16 +12,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to database
-// mongoose.connect(config.mongoUri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+const imagesDir = "./assets/upload";
+if (!fs.existsSync(imagesDir)) {
+  fs.mkdirSync(imagesDir);
+}
+app.use(`/${imagesDir}`, express.static(imagesDir));
 
-// const connection = mongoose.connection;
-// connection.once('open', () => {
-//   console.log('MongoDB database connection established successfully');
-// });
 
 // Routes
 const artistsRouter = require("./routes/artists");
@@ -36,7 +33,7 @@ app.use("/characters", charactersRouter);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send("Something went wrong!");
+  res.status(500).send({message:"Something went wrong!"});
 });
 
 // const PORT = config.port;

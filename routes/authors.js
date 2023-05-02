@@ -1,12 +1,19 @@
 // authors.js
 const express = require('express');
 const router = express.Router();
-const authorController = require('../controllers/authors.controller');
+const {
+    getAllAuthors,
+    getAuthorById,
+    createAuthor,
+    updateAuthor,
+    deleteAuthor
+} = require('../controllers/authors.controller');
+const upload = require('../middleware/multer');
 
-router.get('/', authorController.getAllAuthors);
-router.get('/:id', authorController.getAuthorById);
-// router.post('/', authorController.createAuthor);
-// router.put('/:id', authorController.updateAuthor);
-// router.delete('/:id', authorController.deleteAuthor);
+router.get('/', getAllAuthors);
+router.get('/:id', getAuthorById);
+router.post('/', upload.single("image"), createAuthor);
+router.put('/:id', upload.single("image"), updateAuthor);
+router.delete('/:id', deleteAuthor);
 
 module.exports = router;

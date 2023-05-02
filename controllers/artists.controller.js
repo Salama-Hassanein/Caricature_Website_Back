@@ -1,32 +1,3 @@
-// const Artist = require("../models/artist");
-
-// const getAllArtists = async (req, res, next) => {
-//   try {
-//     const artists = await Artist.find();
-//     res.status(200).json(artists);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
-// const getArtistById = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-//     const artist = await Artist.findById(id);
-//     res.status(200).json(artist);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
-// module.exports = {
-//   getAllArtists,
-//   getArtistById,
-// };
-
-
-
-
 const Artist = require("../models/artist");
 
 const getAllArtists = async (req, res, next) => {
@@ -50,41 +21,44 @@ const getArtistById = async (req, res, next) => {
 
 const createArtist = async (req, res, next) => {
   try {
-    const artist = {...req.body};
-    const newArtist = await Artist.create(artist);
-    res.status(201).json(newArtist);
+    const newArtist = { ...req.body };
+    const artist = await Artist.create(newArtist);
+    if (artist) {
+      return res.status(200).send(artist);
+    } else {
+      return res.status(200).send({ message: "Error in creating artist" });
+    }
   } catch (err) {
     next(err);
   }
 };
 
 const updateArtist = async (req, res, next) => {
+  const newArtist = { ...req.body };
+  const artistId = req.params.id;
+  const artist = await artist.findByIdAndUpdate(artistId, newArtist, { new: true });
   try {
-    const { id } = req.params;
-    const { name, image, birthDate, bio } = req.body;
-    const updatedArtist = await Artist.findByIdAndUpdate(
-      id,
-      {
-        name,
-        image,
-        birthDate,
-        bio,
-      },
-      { new: true }
-    );
-    res.status(200).json(updatedArtist);
+    if (artist) {
+      return res.status(200).send({ message: "Artist updated successfully", artist: artist });
+    } else {
+      return res.status(200).send({ message: "Error in updating Artist" });
+    }
   } catch (err) {
-    next(err);
+    return res.status(500).send({ message: "Internal Server Error" });
   }
 };
 
 const deleteArtist = async (req, res, next) => {
+  const artistId = req.params.id;
+  const artist = await Artist.findByIdAndDelete(artistId, { new: true });
   try {
-    const { id } = req.params;
-    await Artist.findByIdAndDelete(id);
-    res.status(204).end();
+    if (artist) {
+      return res.status(200).send({ message: "Artist deleted successfully", artist: artist });
+    } else {
+      return res.status(200).send({ message: "Error in deleting artist" });
+    }
   } catch (err) {
-    next(err);
+    return res.status(500).send({ message: "Internal Server Error" });
   }
 };
 

@@ -1,12 +1,19 @@
 // caricatures.js
 const express = require("express");
 const router = express.Router();
-const caricatureController = require("../controllers/caricatures.controller");
+const {
+    getAllCaricatures,
+    getCaricatureById,
+    createCaricature,
+    updateCaricature,
+    deleteCaricature
+} = require("../controllers/caricatures.controller");
+const upload = require("../middleware/multer");
 
-router.get('/', caricatureController.getAllCaricatures);
-router.get('/:id', caricatureController.getCaricatureById);
-// router.post('/', caricatureController.createCaricature);
-// router.put('/:id', caricatureController.updateCaricature);
-// router.delete('/:id', caricatureController.deleteCaricature);
+router.get('/', getAllCaricatures);
+router.get('/:id', getCaricatureById);
+router.post('/', upload.single("image"), createCaricature);
+router.put('/:id', upload.single("image"), updateCaricature);
+router.delete('/:id', deleteCaricature);
 
 module.exports = router;

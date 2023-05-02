@@ -26,8 +26,12 @@ const caricatureSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    // required: true,
   },
+  favourite: {
+    type: Boolean,
+    defualt: false
+  }
 });
 
 const Caricature = mongoose.model("Caricature", caricatureSchema);
