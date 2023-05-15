@@ -1,4 +1,4 @@
-const Character = require('../models/character');
+const Character = require('../../models/character');
 
 const getAllCharacters = async (req, res, next) => {
   try {
@@ -42,7 +42,7 @@ const createCharacter = async (req, res, next) => {
   }
 }
 
-const updateCharacter = async(req, res, next) =>{
+const updateCharacter = async (req, res, next) => {
   const newCharacter = { ...req.body };
   const characterId = req.params.id;
   const character = await Character.findByIdAndUpdate(characterId, newCharacter, { new: true });

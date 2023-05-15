@@ -1,4 +1,4 @@
-const Caricature = require('../models/caricature');
+const Caricature = require('../../models/caricature');
 
 const getAllCaricatures = async (req, res, next) => {
   try {

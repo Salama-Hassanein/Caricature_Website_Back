@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: true,
+    default: "http://localhost/assets/upload/default-image.jpg"
   },
   email: {
     type: String,
@@ -18,9 +18,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
- 
+  is_admin: {
+    type: Boolean,
+    default: false
+  }
+
 });
 
-const Character = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
-module.exports = Character;
+module.exports = User;
