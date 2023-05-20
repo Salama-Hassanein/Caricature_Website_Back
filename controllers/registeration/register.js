@@ -26,7 +26,7 @@ const register = async (req, res) => {
 
     let image;
     if (req.file) {
-        image = `${process.env.IMG_URL}/images/${req.file.filename}`;
+        image = `${process.env.IMG_URL}/assets/upload/${req.file.filename}`;
     }
 
     const newUser = {

@@ -1,5 +1,6 @@
 const Caricature = require('../../models/caricature');
 
+
 const getAllCaricatures = async (req, res, next) => {
   try {
     const caricatures = await Caricature.find();
@@ -18,6 +19,20 @@ const getCaricatureById = async (req, res, next) => {
     next(err);
   }
 };
+
+const getCaricatureByCharacterId = async (req, res, next) => {
+  try {
+    const characterId = req.params.id;
+    const caricatures = Caricature.find({ characterName: characterId });
+    if (caricatures) {
+      return res.status(200).send(caricatures);
+    } else {
+      return res.status(200).send({ message: "error" });
+    }
+  } catch (error) {
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+}
 
 const createCaricature = async (req, res, next) => {
   try {
@@ -70,5 +85,6 @@ module.exports = {
   getCaricatureById,
   createCaricature,
   updateCaricature,
-  deleteCaricature
+  deleteCaricature,
+  getCaricatureByCharacterId
 };

@@ -18,6 +18,10 @@ const artistSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  favourite: {
+    type: Boolean,
+    defualt: false
+  }
 });
 
 const Artist = mongoose.model('Artist', artistSchema);

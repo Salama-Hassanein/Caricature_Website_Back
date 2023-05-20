@@ -18,6 +18,10 @@ const authorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  favourite: {
+    type: Boolean,
+    defualt: false
+  }
 });
 
 const Author = mongoose.model('Author', authorSchema);

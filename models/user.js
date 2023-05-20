@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: "http://localhost/assets/upload/default-image.jpg"
+    default: `http://localhost:5000/assets/upload/default-image.jpg`
   },
   email: {
     type: String,

@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const userModel = require("../model/user");
+const userModel = require("../models/user");
 const ADMIN_TOKEN_KEY = process.env.ADMIN_TOKEN_KEY;
-const USER_TOKEN_KEY = process.env.USER_TOKEN_KEY;
+const TOKEN_KEY = process.env.TOKEN_KEY;
 
 const loginMiddleware = async function (req, res, next) {
     const token = req.headers["access-token"];
@@ -12,9 +12,10 @@ const loginMiddleware = async function (req, res, next) {
             .send({ Message: "A Token Is Required For Authentication" });
     }
     try {
-        const decoded = jwt.verify(token, USER_TOKEN_KEY);
+        const decoded = jwt.verify(token, TOKEN_KEY);
         const user = await userModel.findById(decoded.user_id);
 
+        console.log(user);
         if (!user.is_admin) {
             req.user = user;
             return next();

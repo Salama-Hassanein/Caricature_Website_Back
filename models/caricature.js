@@ -13,7 +13,6 @@ const caricatureSchema = new mongoose.Schema({
   },
   artistName: {
     //needs edits
-
     type: mongoose.Schema.Types.ObjectId,
     ref: "Artist",
     required: true,

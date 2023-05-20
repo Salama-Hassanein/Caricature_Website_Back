@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const ADMIN_TOKEN_KEY = process.env.ADMIN_TOKEN_KEY;
-const USER_TOKEN_KEY = process.env.USER_TOKEN_KEY;
+const TOKEN_KEY = process.env.TOKEN_KEY;
 const userModel = require("../../models/user");
 
 
@@ -33,20 +33,21 @@ const login = async (req, res) => {
                         image: user.image,
                         is_admin: user.is_admin,
                     },
-                    ADMIN_TOKEN_KEY
+                    TOKEN_KEY
                 );
-            } else {
-                token = jwt.sign(
-                    {
-                        user_id: user._id,
-                        email,
-                        name: user.name,
-                        image: user.image,
-                        is_admin: user.is_admin,
-                    },
-                    USER_TOKEN_KEY
-                );
-            }
+             } 
+            //else {
+            //     token = jwt.sign(
+            //         {
+            //             user_id: user._id,
+            //             email,
+            //             name: user.name,
+            //             image: user.image,
+            //             is_admin: user.is_admin,
+            //         },
+            //         USER_TOKEN_KEY
+            //     );
+            // }
             user.token = token;
             return res.status(200).send({
                 Message: "success",
