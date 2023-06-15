@@ -71,10 +71,24 @@ const deleteAuthor = async (req, res, next) => {
   }
 }
 
+const numberOfAuthors = async (req, res, next) => {
+  try {
+    const authors = await Author.find().count();
+    if (authors) {
+      return res.status(200).send({ message: "authors deleted successfully", authors: authors });
+    } else {
+      return res.status(200).send({ message: "Error in deleting authors" });
+    }
+  } catch (err) {
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+
 module.exports = {
   getAllAuthors,
   getAuthorById,
   createAuthor,
   updateAuthor,
-  deleteAuthor
+  deleteAuthor,
+  numberOfAuthors
 };

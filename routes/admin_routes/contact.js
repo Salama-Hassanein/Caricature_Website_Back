@@ -9,7 +9,7 @@ const {
 } = require("../../controllers/admin_contollers/contactus");
 // const upload = require("../../middleware/multer");
 
-router.get('/contacts', getAllContacts);
+router.get('/contact', getAllContacts);
 router.get('/contact/:id', getContactById);
 router.post('/contact', createContact);
 // router.put('/contact/:id', updateCaricature);

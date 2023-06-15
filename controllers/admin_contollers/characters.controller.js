@@ -71,10 +71,62 @@ const deleteCharacter = async (req, res, next) => {
   }
 }
 
+const getNumberOfCharacterByAuthorId = async (req, res, next) => {
+  const authorId = req.params.id;
+
+  console.log(authorId);
+
+  try {
+    const characters = await Character.find({ author: authorId }).count();
+
+    if (characters != null) {
+      return res.status(200).send({ count: characters });
+    } else {
+      return res.status(200).send({ message: "Error in retrieving characters" });
+    }
+  } catch (error) {
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+
+const getNumberOfCharacterByArtistId = async (req, res, next) => {
+  const artistId = req.params.id
+  console.log(artistId);
+
+  try {
+    const characters = await Character.find({ artist: artistId }).count();
+    if (characters != null) {
+      return res.status(200).send({ count: characters });
+    } else {
+      return res.status(200).send({ message: "Error in retrieving characters" });
+    }
+  } catch (error) {
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+
+const lastCharacter = async (req, res, next) => {
+  try {
+    const lastChar = await Character.find().sort({ _id: -1 }).limit(1);
+    if (lastChar != null) {
+      return res.status(200).send(lastChar);
+    } else {
+      return res.status(200).send({ message: "Error in retrieving last Character" });
+    }
+  } catch (error) {
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+
+
+
 module.exports = {
   getAllCharacters,
   getCharactersByAuthorOrArtist,
   createCharacter,
   updateCharacter,
-  deleteCharacter
+  deleteCharacter,
+  lastCharacter,
+  getNumberOfCharacterByAuthorId,
+  getNumberOfCharacterByArtistId
 };

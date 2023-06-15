@@ -62,10 +62,24 @@ const deleteArtist = async (req, res, next) => {
   }
 };
 
+const numberOfArtists = async (req, res, next) => {
+  try {
+    const artists = await Artist.find().count();
+    if (artists) {
+      return res.status(200).send({ message: "artists deleted successfully", artists: artists });
+    } else {
+      return res.status(200).send({ message: "Error in deleting artists" });
+    }
+  } catch (err) {
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+
 module.exports = {
   getAllArtists,
   getArtistById,
   createArtist,
   updateArtist,
   deleteArtist,
+  numberOfArtists
 };

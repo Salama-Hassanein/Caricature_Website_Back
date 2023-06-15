@@ -54,7 +54,9 @@ app.listen(PORT, (err) => {
     console.log(
       `*-----------------Server running on ${PORT}------------------*`
     );
+
     dbConnection;
+
   } else {
     console.log(`*-----------------Error in Server---------------*`);
   }

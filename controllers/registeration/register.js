@@ -5,13 +5,14 @@ const bcrypt = require("bcrypt");
 // Register
 const register = async (req, res) => {
     const {
-        name,
+        firstName,
+        lastName,
         email,
         password,
     } = req.body;
 
     // Validate user input
-    if (!(email && password && name)) {
+    if (!(email && password && firstName && lastName)) {
         return res.status(400).send({ Message: "Some inputs are missing" });
     }
     // check if user already exist
@@ -30,7 +31,8 @@ const register = async (req, res) => {
     }
 
     const newUser = {
-        name: name,
+        firstName: firstName,
+        lastName: lastName,
         email: email.toLowerCase(), // sanitize: convert email to lowercase
         password: encryptedPassword,
         image: image,

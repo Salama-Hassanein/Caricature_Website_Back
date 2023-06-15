@@ -6,11 +6,13 @@ const {
     getCaricatureById,
     createCaricature,
     updateCaricature,
-    deleteCaricature
+    deleteCaricature,
+    lastCaricature
 } = require("../../controllers/admin_contollers/caricatures.controller");
 const upload = require("../../middleware/multer");
 
-router.get('/caricatures', getAllCaricatures);
+router.get('/caricature', getAllCaricatures);
+router.get('/caricature/last/one/in', lastCaricature);
 router.get('/caricature/:id', getCaricatureById);
 router.post('/caricature', upload.single("image"), createCaricature);
 router.put('/caricature/:id', upload.single("image"), updateCaricature);

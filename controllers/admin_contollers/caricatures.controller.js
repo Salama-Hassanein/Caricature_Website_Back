@@ -3,7 +3,7 @@ const Caricature = require('../../models/caricature');
 
 const getAllCaricatures = async (req, res, next) => {
   try {
-    const caricatures = await Caricature.find();
+    const caricatures = await Caricature.find().populate();
     res.status(200).json(caricatures);
   } catch (err) {
     next(err);
@@ -80,11 +80,26 @@ const deleteCaricature = async (req, res, next) => {
 }
 
 
+const lastCaricature = async (req, res, next) => {
+  try {
+    const lastCari = await Caricature.find().sort({ _id: -1 }).limit(1);
+    if (lastCari != null) {
+      return res.status(200).send(lastCari);
+    } else {
+      return res.status(200).send({ message: "Error in retrieving last Caricature" });
+    }
+  } catch (error) {
+    return res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+
+
 module.exports = {
   getAllCaricatures,
   getCaricatureById,
   createCaricature,
   updateCaricature,
   deleteCaricature,
+  lastCaricature,
   getCaricatureByCharacterId
 };

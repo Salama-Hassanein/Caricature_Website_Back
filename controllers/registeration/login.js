@@ -19,23 +19,29 @@ const login = async (req, res) => {
         if (user == null) {
             return res.status(404).send({ Message: "User not found" });
         }
+
+        if (user == null) {
+            return res.status(404).send({ Message: "Please confirm E-mail before login" });
+        }
+
+
         const comparePasswords = await bcrypt.compare(password, user.password);
 
         if (user && comparePasswords) {
             // Create token
             let token;
-            if (user.is_admin) {
-                token = jwt.sign(
-                    {
-                        user_id: user._id,
-                        email,
-                        name: user.name,
-                        image: user.image,
-                        is_admin: user.is_admin,
-                    },
-                    TOKEN_KEY
-                );
-             } 
+            // if (user.is_admin) {
+            token = jwt.sign(
+                {
+                    user_id: user._id,
+                    email,
+                    name: user.name,
+                    image: user.image,
+                    is_admin: user.is_admin,
+                },
+                TOKEN_KEY
+            );
+            //  } 
             //else {
             //     token = jwt.sign(
             //         {
