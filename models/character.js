@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const characterSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    default: `http://localhost:5000/assets/upload/default-image.jpg`
   },
   image: {
     type: String,

@@ -2,7 +2,7 @@ const Character = require('../../models/character');
 
 const getAllCharacters = async (req, res, next) => {
   try {
-    const characters = await Character.find();
+    const characters = await Character.find().populate('author').populate('artist');
     res.status(200).json(characters);
   } catch (err) {
     next(err);

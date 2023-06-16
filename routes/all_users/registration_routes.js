@@ -9,6 +9,7 @@ const { getAllCaricatures, getCaricatureById, getCaricatureByCharacterId } = req
 const { getAllCharacters, getCharactersByAuthorOrArtist } = require("../../controllers/admin_contollers/characters.controller");
 const { contactUs } = require("../../controllers/contactus/contactus");
 const loginMiddleware = require("../../middleware/login_middleware");
+const { createFavouriteCaricature } = require("../../controllers/favourite_caricature/create_favourite_caricature");
 
 //=============Register==========================================
 router.post("/register", upload.single("image"), register);
@@ -49,4 +50,15 @@ router.get('/contact', contactUs);
 
 /*****************************************/
 
+
+/****Add favourite caricature****/
+router.post('/caricature/:caricatureid/userid/:id',loginMiddleware, createFavouriteCaricature);
+
+/*****************************************/
+
+
+
 module.exports = router;
+
+
+
