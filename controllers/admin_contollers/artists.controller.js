@@ -36,7 +36,7 @@ const createArtist = async (req, res, next) => {
 const updateArtist = async (req, res, next) => {
   const newArtist = { ...req.body };
   const artistId = req.params.id;
-  const artist = await artist.findByIdAndUpdate(artistId, newArtist, { new: true });
+  const artist = await Artist.findByIdAndUpdate(artistId, newArtist, { new: true });
   try {
     if (artist) {
       return res.status(200).send({ message: "Artist updated successfully", artist: artist });
