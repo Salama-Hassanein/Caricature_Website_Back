@@ -18,7 +18,7 @@ router.post("/register", upload.single("image"), register);
 router.post("/login", login);
 
 /****GET ALL ARTIST AND GET ONE BY ID****/
-router.get('/artist', getAllArtists);
+router.get('/artists', getAllArtists);
 router.get('/artist/:id', getArtistById);
 
 /*****************************************/

@@ -11,7 +11,7 @@ const {
 } = require("../../controllers/admin_contollers/authors.controller");
 const upload = require('../../middleware/multer');
 
-router.get('/author', getAllAuthors);
+router.get('/authors', getAllAuthors);
 router.get('/author/:id', getAuthorById);
 router.get('/count/author', numberOfAuthors);
 router.post('/author', upload.single("image"), createAuthor);

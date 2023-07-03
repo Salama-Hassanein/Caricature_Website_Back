@@ -11,7 +11,7 @@ const {
 } = require("../../controllers/admin_contollers/artists.controller");
 const upload = require("../../middleware/multer");
 
-router.get('/artist', getAllArtists);
+router.get('/artists', getAllArtists);
 router.get('/artist/:id', getArtistById);
 router.get('/count/artist', numberOfArtists);
 router.post('/artist', upload.single("image"), createArtist);

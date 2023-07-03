@@ -14,7 +14,7 @@ const {
 const upload = require("../../middleware/multer");
 
 
-router.get('/character', getAllCharacters);
+router.get('/characters', getAllCharacters);
 router.get('/character/last/one/in', lastCharacter);
 router.get('/character/artist/:id', getNumberOfCharacterByArtistId);
 router.get('/character/author/:id', getNumberOfCharacterByAuthorId);

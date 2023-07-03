@@ -11,7 +11,7 @@ const {
 } = require("../../controllers/admin_contollers/caricatures.controller");
 const upload = require("../../middleware/multer");
 
-router.get('/caricature', getAllCaricatures);
+router.get('/caricatures', getAllCaricatures);
 router.get('/caricature/last/one/in', lastCaricature);
 router.get('/caricature/:id', getCaricatureById);
 router.post('/caricature', upload.single("image"), createCaricature);
