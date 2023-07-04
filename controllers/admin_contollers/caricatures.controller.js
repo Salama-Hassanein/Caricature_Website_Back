@@ -1,9 +1,11 @@
 const Caricature = require('../../models/caricature');
 
 
+
+
 const getAllCaricatures = async (req, res, next) => {
   try {
-    const caricatures = await Caricature.find().populate();
+    const caricatures = await Caricature.find().populate('authorName').populate('artistName').populate('characterName');
     res.status(200).json(caricatures);
   } catch (err) {
     next(err);

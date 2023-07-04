@@ -48,6 +48,7 @@ const updateCharacter = async (req, res, next) => {
   const character = await Character.findByIdAndUpdate(characterId, newCharacter, { new: true });
   try {
     if (character) {
+
       return res.status(200).send({ message: "character updated successfully", character: character });
     } else {
       return res.status(200).send({ message: "Error in updating character" });
@@ -74,7 +75,6 @@ const deleteCharacter = async (req, res, next) => {
 const getNumberOfCharacterByAuthorId = async (req, res, next) => {
   const authorId = req.params.id;
 
-  console.log(authorId);
 
   try {
     const characters = await Character.find({ author: authorId }).count();
@@ -91,7 +91,6 @@ const getNumberOfCharacterByAuthorId = async (req, res, next) => {
 
 const getNumberOfCharacterByArtistId = async (req, res, next) => {
   const artistId = req.params.id
-  console.log(artistId);
 
   try {
     const characters = await Character.find({ artist: artistId }).count();

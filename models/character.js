@@ -8,17 +8,17 @@ const characterSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: true,
+    // required: true,
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Author',
-    required: true,
+    // required: true,
   },
   artist: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Artist',
-    required: true,
+    // required: true,
   },
 });
 
